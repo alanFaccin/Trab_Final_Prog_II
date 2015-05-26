@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h>
+//#include <conio.h>
 
 #define PAI 0;
 #define MAE 1;
@@ -68,13 +68,7 @@ void pesquisar(const char* valor)
 	
 }
 
-int main(int argc, const char * argv[]) {
-    
-    // insert code here...
-    printf("Hello, World!\n");
-    return 0;
-    
-}
+
 
 void visualizarArvore(struct Pessoa* pessoa)
 {
@@ -83,8 +77,20 @@ void visualizarArvore(struct Pessoa* pessoa)
 
 int main(int argc, const char * argv[]) {
     
-    // insert code here...
-    printf("Hello, World!\n");
+    int opcao=0;
+    
+    puts("========== ##### Arvore Genealogica ##### ==========");
+    puts("=#---------- Escolha uma opcao do menu: -----------#= \n");
+    puts("|#  1 - Construir Arvore Genealogica  ");
+    puts("|#  2 - Salvar em Arquivo ");
+    puts("|#  3 - Carregar do Arquivo  ");
+    puts("|#  4 - Visualizar Arvore ");
+    puts("|#  5 - Pesquisar Pessoa ");
+    
+    scanf("%d",&opcao);
+
+    printf("%d",opcao);
+    
     return 0;
     
 }
