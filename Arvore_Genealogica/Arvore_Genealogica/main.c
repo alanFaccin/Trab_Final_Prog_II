@@ -7,6 +7,44 @@
 //
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+
+struct Pessoa {
+	char* nome;
+	struct Pessoa* pai;
+	struct Pessoa* mae;
+};
+
+struct Pessoa *primeiro;
+struct Pessoa *ultimo;
+
+///////////////////////////////////////////////////////////////////
+//   
+//       FUNCOES USADAS PARA EFETUAR A ALOCAÇÃO DA LISTA  
+//
+///////////////////////////////////////////////////////////////////
+void inicialize()
+{
+	 struct Pessoa *aux = (struct Pessoa*)(malloc(sizeof(struct Pessoa));
+	 primeiro = aux;
+	 ultimo = primeiro;
+	 primeiro->pai = NULL;
+	 primeiro->mae = NULL;
+}
+
+void inserir(struct Pessoa* pessoa)
+{
+	ultimo->prox = endereco;
+	endereco->ant = ultimo;
+	ultimo = ultimo->prox;
+	endereco->prox = NULL;		
+}
+
+void pesquisar(const char* valor)
+{
+	
+}
 
 int main(int argc, const char * argv[]) {
     
