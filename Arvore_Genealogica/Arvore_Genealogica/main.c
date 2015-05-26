@@ -46,6 +46,11 @@ void pesquisar(const char* valor)
 	
 }
 
+void visualizarArvore(struct Pessoa* pessoa)
+{
+	//Massinha
+}
+
 int main(int argc, const char * argv[]) {
     
     // insert code here...
