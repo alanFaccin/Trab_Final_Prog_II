@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-//#include <conio.h>
-
-#define PAI 0;
-#define MAE 1;
+#include "TArvore.c"
+#include "TString.h"
 
 //
 //  main.c
@@ -12,63 +10,7 @@
 //  Created by Alan Jhones Faccin  Diovani B. da Motta e Rafael Pablo Massocato on 5/25/15.
 //  Copyright (c) 2015 Alan Jhones Faccin Diovani B. da Motta e Rafael Pablo Massocato. All rights reserved.
 //
-
-struct Pessoa {
-	char* nome;
-	struct Pessoa* pai;
-	struct Pessoa* mae;
-};
-
-struct Pessoa *primeiro;
-struct Pessoa *ultimo;
-
-///////////////////////////////////////////////////////////////////
-//   
-//       FUNCOES USADAS PARA EFETUAR A ALOCAÇÃO DA LISTA  
-//
-///////////////////////////////////////////////////////////////////
-void inicialize()
-{
-	 struct Pessoa *aux = (struct Pessoa*)(malloc(sizeof(struct Pessoa)));
-	 primeiro = aux;
-	 ultimo = primeiro;
-	 primeiro->pai = NULL;
-	 primeiro->mae = NULL;
-}
-
-void inserir(struct Pessoa* pessoa)
-{
-	ultimo = pessoa;
-	pessoa->pai->mae = NULL;
-	pessoa->pai->pai = NULL;
-	pessoa->mae->pai = NULL;
-	pessoa->mae->mae = NULL;		
-}
-
-void add(struct Pessoa* pessoa,const tipo)
-{
-	switch(tipo)
-	{
-		case PAI:
-			ultimo->pai->pai = pessoa;
-			break;
-		case MAE:
-			ultimo->mae->mae = pessoa;
-			break;
-	}
-	ultimo = pessoa;
-	pessoa->pai->mae = NULL;
-	pessoa->pai->pai = NULL;
-	pessoa->mae->pai = NULL;
-	pessoa->mae->mae = NULL;		
-}
-
-void pesquisar(const char* valor)
-{
-	
-}
-
-
+TPessoa ultimo;
 
 void visualizarArvore(struct Pessoa* pessoa)
 {
@@ -78,7 +20,18 @@ void visualizarArvore(struct Pessoa* pessoa)
 int main(int argc, const char * argv[]) {
     
     int opcao=0;
-    
+    arvore = TArvoreCreate();
+ 	arvore->pessoa = TPessoaCreate("DIOVANI");
+ 	TPessoa pai = TPessoaCreate("ADENIR");
+	TPessoa mae = TPessoaCreate("ROSINA");
+    TPessoaInsert(arvore->pessoa,pai,PAI);
+	TPessoaInsert(arvore->pessoa,mae,MAE);
+	TPessoaInOrdem(arvore->pessoa);
+	printf("\n");
+	TPessoaPosOrdem(arvore->pessoa);
+	printf("\n");
+	TPessoaPreOrdem(arvore->pessoa);
+			    
     puts("========== ##### Arvore Genealogica ##### ==========");
     puts("=#---------- Escolha uma opcao do menu: -----------#= \n");
     puts("|#  1 - Construir Arvore Genealogica  ");
