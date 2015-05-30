@@ -14,72 +14,10 @@
 
 TPessoa ultimo;
 
-struct Pessoa *primeiro;
-struct Pessoa *ultimo;
-
-int* opcao;
-
-
-
-
-///////////////////////////////////////////////////////////////////
-//   
-//       FUNCOES USADAS PARA EFETUAR A ALOCAÇÃO DA LISTA  
-//
-///////////////////////////////////////////////////////////////////
-void inicialize()
-{
-	 struct Pessoa *aux = (struct Pessoa*)(malloc(sizeof(struct Pessoa)));
-	 primeiro = aux;
-	 ultimo = primeiro;
-	 primeiro->pai = NULL;
-	 primeiro->mae = NULL;
-}
-
-void inserir(struct Pessoa* pessoa)
-{
-	ultimo = pessoa;
-	pessoa->pai->mae = NULL;
-	pessoa->pai->pai = NULL;
-	pessoa->mae->pai = NULL;
-	pessoa->mae->mae = NULL;		
-}
-/*
-void add(struct Pessoa* pessoa,const tipo)
-{
-	switch(tipo)
-	{
-        case PAI :
-			ultimo->pai->pai = pessoa;
-			break;
-		case MAE:
-			ultimo->mae->mae = pessoa;
-			break;
-	}
-	ultimo = pessoa;
-	pessoa->pai->mae = NULL;
-	pessoa->pai->pai = NULL;
-	pessoa->mae->pai = NULL;
-	pessoa->mae->mae = NULL;		
-}
-*/
-void pesquisar(const char* valor)
-{
-	
-}
-
-
-
-
-void visualizarArvore(struct Pessoa* pessoa)
-{
-	//Massinha
-}
-
+int opcao=0;
 
 int main(int argc, const char * argv[]) {
     
-    int opcao=0;
     
     arvore = TArvoreCreate();
  	arvore->pessoa = TPessoaCreate("DIOVANI");
