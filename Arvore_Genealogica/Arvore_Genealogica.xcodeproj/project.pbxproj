@@ -235,6 +235,7 @@
 				D40D810B1B13E76A001B1F5E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
