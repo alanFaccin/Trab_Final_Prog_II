@@ -19,6 +19,7 @@ int opcao=0;
 int main(int argc, const char * argv[]) {
     
     
+<<<<<<< HEAD
     arv = TArvoreCreate();
  	arv->pessoa = TPessoaCreate("DIOVANI");
  	//
@@ -63,6 +64,56 @@ int main(int argc, const char * argv[]) {
 	//TPessoaPosOrdem(arv->pessoa);
 	//printf("\n");
 	//TPessoaPreOrdem(arv->pessoa);
+=======
+    arvore = TArvoreCreate();
+ 	arvore->pessoa = TPessoaCreate("DIOVANI");
+ 	// pai e mae
+ 	TPessoa pai = TPessoaCreate("ADENIR");
+	TPessoa mae = TPessoaCreate("ROSINA");
+    TPessoaInsert(arvore->pessoa,pai,PAI);
+	TPessoaInsert(arvore->pessoa,mae,MAE);
+	// avo e avó paterna 
+	TPessoa pai2p = TPessoaCreate("avo paterno");
+	TPessoa mae2p = TPessoaCreate("avoh paterna");
+    TPessoaInsert(arvore->pessoa->pai,pai2p,PAI);
+	TPessoaInsert(arvore->pessoa->pai,mae2p,MAE);
+	// avo e avó materna
+	TPessoa pai2m = TPessoaCreate("avo mateno");
+	TPessoa mae2m = TPessoaCreate("avoh materna");
+    TPessoaInsert(arvore->pessoa->mae,pai2m,PAI);
+	TPessoaInsert(arvore->pessoa->mae,mae2m,MAE);
+	
+	// pai e mae do avo paterno 
+	TPessoa pai_avo_p = TPessoaCreate("pai avo p");
+	TPessoa mae_avo_p = TPessoaCreate("mae avo p");
+    TPessoaInsert(arvore->pessoa->pai->pai,pai_avo_p,PAI);
+	TPessoaInsert(arvore->pessoa->pai->pai,mae_avo_p,MAE);
+	// pai e mae da avoh paterno 
+	TPessoa pai_avoh_p = TPessoaCreate("pai avoh p");
+	TPessoa mae_avoh_p = TPessoaCreate("mae avoh p");
+    TPessoaInsert(arvore->pessoa->pai->mae,pai_avoh_p,PAI);
+	TPessoaInsert(arvore->pessoa->pai->mae,mae_avoh_p,MAE);
+	
+	
+	// pai e mae do avo matrno 
+	TPessoa pai_avo_m = TPessoaCreate("pai avo m");
+	TPessoa mae_avo_m = TPessoaCreate("mae avo m");
+    TPessoaInsert(arvore->pessoa->mae->pai,pai_avo_m,PAI);
+	TPessoaInsert(arvore->pessoa->mae->pai,mae_avo_m,MAE);
+	// pai e mae do avoh materna 
+	TPessoa pai_avoh_m = TPessoaCreate("pai avoh m");
+	TPessoa mae_avoh_m = TPessoaCreate("mae avoh m");
+    TPessoaInsert(arvore->pessoa->mae->mae,pai_avoh_m,PAI);
+	TPessoaInsert(arvore->pessoa->mae->mae,mae_avoh_m,MAE);
+
+	
+	
+	TPessoaInOrdem(arvore->pessoa);
+	printf("\n");
+
+  //	TPessoaWrite(arvore->pessoa);
+  //	TPessoaRead();
+>>>>>>> origin/master
     
     /*
     *opcao = 0;
@@ -99,7 +150,7 @@ int main(int argc, const char * argv[]) {
 
 			    
 }
-
+/*
 void menu (){
 
 
@@ -114,5 +165,5 @@ void menu (){
     scanf("%d",opcao);
 
 }
-
+*/
 
