@@ -16,14 +16,8 @@ typedef struct Arvore {
 	TPessoa* pessoa;
 } TArvore;
 
-//typedef struct Arvore* TArvore;
-
-<<<<<<< HEAD
 TArvore* arv;
-=======
-TArvore arvore;
-TArvore arvore_file;
->>>>>>> origin/master
+TArvore* arvore_file;
 
 //constantes que identificam o tipo de registro
 const TTipo PAI = 0;
@@ -42,8 +36,6 @@ TPessoa* TPessoaCreate(char* nome)
 {
 	TPessoa* pessoa = (TPessoa*) malloc(sizeof(TPessoa));
 	pessoa->nome = malloc(sizeof(char*)); 
-	//TStringCreate();
-	//TStringSet
 	strcpy(pessoa->nome,nome);
 	pessoa->mae = NULL;
 	pessoa->pai = NULL;
@@ -101,16 +93,6 @@ void TPessoaInOrdem(TPessoa* pessoa)
 		TPessoaInOrdem(pessoa->mae);
 	}
 }
-/*
-void TPessoaLiberar(TPessoa* pessoa)
-{
-	if(!TPessoaVazia(pessoa))
-	{
-		TPessoaLiberar(pessoa->pai);
-		TPessoaLiberar(pessoa->mae);
-		free(pessoa);
-	}
-}*/
 
 int TPessoaVazia(TPessoa* pessoa)
 {
@@ -119,7 +101,7 @@ int TPessoaVazia(TPessoa* pessoa)
 
 /// teste gravar arvore arquivo 
 
-void TPessoaWrite(TPessoa pessoa)
+void TPessoaWrite(TPessoa* pessoa)
 {
 	if(!TPessoaVazia(pessoa))
 	{
@@ -158,13 +140,13 @@ void TPessoaRead()
 {
 	int r,i=0;
 	FILE *fp;
-	TPessoa leitura;
+	TPessoa* leitura;
 	arvore_file = TArvoreCreate();
 	fp = fopen("E:\\arvore.bin","rb");
 	// tenta abrir o arquivo
 	if(fp){	
 	
-	    leitura = malloc (sizeof(TPessoa));
+	    leitura = malloc (sizeof(TPessoa*));
 		while(!feof(fp)){
 	    
 		fseek(fp,sizeof(TPessoa)*i,SEEK_SET);

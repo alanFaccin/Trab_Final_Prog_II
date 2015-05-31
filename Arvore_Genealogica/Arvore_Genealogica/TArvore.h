@@ -23,6 +23,4 @@ void TPessoaPosOrdem(TPessoa* pessoa);
 
 void TPessoaInOrdem(TPessoa* pessoa);
 
-//void TPessoaLiberar(TPessoa* pessoa);
-
 int TPessoaVazia(TPessoa* pessoa);
