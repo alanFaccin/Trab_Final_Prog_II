@@ -4,22 +4,21 @@
 #include "TArvore.h"
 #include "TString.c"
 
-struct Pessoa {
+typedef struct Pessoa {
 	char* nome;
-	struct Pessoa* pai;
-	struct Pessoa* mae;
-};
+	TPessoa* pai;
+	TPessoa* mae;
+} TPessoa;
 
-typedef struct Pessoa* TPessoa;
 typedef int TTipo;
 
-struct Arvore {
-	TPessoa pessoa;
-};
+typedef struct Arvore {
+	TPessoa* pessoa;
+} TArvore;
 
-typedef struct Arvore* TArvore;
+//typedef struct Arvore* TArvore;
 
-TArvore arvore;
+TArvore* arv;
 
 //constantes que identificam o tipo de registro
 const TTipo PAI = 0;
@@ -28,23 +27,25 @@ const TTipo MAE = 1;
 ///    Funções usadas para a criação da estrutura de dados   ///
 ///////////////////////////////////////////////////////////////
 
-TArvore TArvoreCreate()
+TArvore* TArvoreCreate()
 {
-	TArvore novo = (TArvore) malloc(sizeof(TArvore));
+	TArvore* novo = (TArvore*) malloc(sizeof(TArvore));
 	return novo;	
 }
 
-TPessoa TPessoaCreate(char* nome)
+TPessoa* TPessoaCreate(char* nome)
 {
-	TPessoa pessoa = (TPessoa) malloc(sizeof(TPessoa));
-	pessoa->nome = TStringCreate();
-	TStringSet(pessoa->nome,nome);
+	TPessoa* pessoa = (TPessoa*) malloc(sizeof(TPessoa));
+	pessoa->nome = malloc(sizeof(char*)); 
+	//TStringCreate();
+	//TStringSet
+	strcpy(pessoa->nome,nome);
 	pessoa->mae = NULL;
 	pessoa->pai = NULL;
 	return pessoa;	
 }
 
-TPessoa TPessoaInsert(TPessoa raiz, TPessoa novo,TTipo tipo)
+TPessoa* TPessoaInsert(TPessoa* raiz, TPessoa* novo,TTipo tipo)
 {
 	if(raiz == NULL)
 	{
@@ -66,7 +67,7 @@ TPessoa TPessoaInsert(TPessoa raiz, TPessoa novo,TTipo tipo)
 	return raiz;
 }
 
-void TPessoaPreOrdem(TPessoa pessoa)
+void TPessoaPreOrdem(TPessoa* pessoa)
 {
 	if(!TPessoaVazia(pessoa))
 	{
@@ -76,7 +77,7 @@ void TPessoaPreOrdem(TPessoa pessoa)
 	}
 }
 
-void TPessoaPosOrdem(TPessoa pessoa)
+void TPessoaPosOrdem(TPessoa* pessoa)
 {
 	if(!TPessoaVazia(pessoa))
 	{
@@ -86,7 +87,7 @@ void TPessoaPosOrdem(TPessoa pessoa)
 	}
 }
 
-void TPessoaInOrdem(TPessoa pessoa)
+void TPessoaInOrdem(TPessoa* pessoa)
 {
 	if(!TPessoaVazia(pessoa))
 	{
@@ -95,8 +96,8 @@ void TPessoaInOrdem(TPessoa pessoa)
 		TPessoaInOrdem(pessoa->mae);
 	}
 }
-
-TPessoa TPessoaLiberar(TPessoa pessoa)
+/*
+void TPessoaLiberar(TPessoa* pessoa)
 {
 	if(!TPessoaVazia(pessoa))
 	{
@@ -104,10 +105,9 @@ TPessoa TPessoaLiberar(TPessoa pessoa)
 		TPessoaLiberar(pessoa->mae);
 		free(pessoa);
 	}
-	return NULL;
-}
+}*/
 
-int TPessoaVazia(TPessoa pessoa)
+int TPessoaVazia(TPessoa* pessoa)
 {
 	return (pessoa == NULL);
 }

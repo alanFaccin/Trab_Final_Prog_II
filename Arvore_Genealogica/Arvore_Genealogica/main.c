@@ -12,24 +12,57 @@
 //  Copyright (c) 2015 Alan Jhones Faccin Diovani B. da Motta e Rafael Pablo Massocato. All rights reserved.
 //
 
-TPessoa ultimo;
+TPessoa* ultimo;
 
 int opcao=0;
 
 int main(int argc, const char * argv[]) {
     
     
-    arvore = TArvoreCreate();
- 	arvore->pessoa = TPessoaCreate("DIOVANI");
- 	TPessoa pai = TPessoaCreate("ADENIR");
-	TPessoa mae = TPessoaCreate("ROSINA");
-    TPessoaInsert(arvore->pessoa,pai,PAI);
-	TPessoaInsert(arvore->pessoa,mae,MAE);
-	TPessoaInOrdem(arvore->pessoa);
+    arv = TArvoreCreate();
+ 	arv->pessoa = TPessoaCreate("DIOVANI");
+ 	//
+	TPessoa* pai = TPessoaCreate("ADENIR");
+	TPessoa* mae = TPessoaCreate("ROSINA");
+    TPessoaInsert(arv->pessoa,pai,PAI);
+	TPessoaInsert(arv->pessoa,mae,MAE);
+	//
+	TPessoa* avoP = TPessoaCreate("AMANDIO");
+    TPessoa* avaP = TPessoaCreate("MARCINA");
+	TPessoaInsert(arv->pessoa->pai,avoP,PAI);
+	TPessoaInsert(arv->pessoa->pai,avaP,MAE);
+	//
+	TPessoa* avoPM = TPessoaCreate("AMANDIOM");
+    TPessoa* avoPP = TPessoaCreate("AMANDIOP");
+	TPessoaInsert(arv->pessoa->pai->pai,avoPP,PAI);
+	TPessoaInsert(arv->pessoa->pai->pai,avoPM,MAE);
+	//
+	TPessoa* avoPMP = TPessoaCreate("MARCINAMP");
+    TPessoa* avoPPP = TPessoaCreate("MARCINAPP");
+	TPessoaInsert(arv->pessoa->pai->mae,avoPPP,PAI);
+	TPessoaInsert(arv->pessoa->pai->mae,avoPMP,MAE);
+	//
+	
+	TPessoa* avoM = TPessoaCreate("DORVALINO");
+    TPessoa* avaM = TPessoaCreate("VILMA");
+	TPessoaInsert(arv->pessoa->mae,avoM,PAI);
+	TPessoaInsert(arv->pessoa->mae,avaM,MAE);
+	//
+	TPessoa* avoMM = TPessoaCreate("DORVALINOM");
+    TPessoa* avoMP = TPessoaCreate("DORVALINOP");
+	TPessoaInsert(arv->pessoa->mae->pai,avoMP,PAI);
+	TPessoaInsert(arv->pessoa->mae->pai,avoMM,MAE);
+	//
+	TPessoa* avoMMP = TPessoaCreate("VILMAMP");
+    TPessoa* avoMPP = TPessoaCreate("VILMAPP");
+	TPessoaInsert(arv->pessoa->mae->mae,avoMPP,PAI);
+	TPessoaInsert(arv->pessoa->mae->mae,avoMMP,MAE);
+		
+	TPessoaInOrdem(arv->pessoa);
 	printf("\n");
-	TPessoaPosOrdem(arvore->pessoa);
-	printf("\n");
-	TPessoaPreOrdem(arvore->pessoa);
+	//TPessoaPosOrdem(arv->pessoa);
+	//printf("\n");
+	//TPessoaPreOrdem(arv->pessoa);
     
     /*
     *opcao = 0;
