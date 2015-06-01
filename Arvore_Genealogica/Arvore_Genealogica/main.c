@@ -19,49 +19,49 @@ int opcao=0;
 int main(int argc, const char * argv[]) {
     
     arv = TArvoreCreate();
- 	arv->pessoa = TPessoaCreate("DIOVANI");
+ 	arv->pessoa = TPessoaCreate("PESSOA");
  	//
-	TPessoa* pai = TPessoaCreate("ADENIR");
-	TPessoa* mae = TPessoaCreate("ROSINA");
+	TPessoa* pai = TPessoaCreate("PAI");
+	TPessoa* mae = TPessoaCreate("MAE");
     TPessoaInsert(arv->pessoa,pai,PAI);
 	TPessoaInsert(arv->pessoa,mae,MAE);
 	//
-	TPessoa* avoP = TPessoaCreate("AMANDIO");
-    TPessoa* avaP = TPessoaCreate("MARCINA");
+	TPessoa* avoP = TPessoaCreate("AVOPATERNO");
+    TPessoa* avaP = TPessoaCreate("AVOHPATERNA");
 	TPessoaInsert(arv->pessoa->pai,avoP,PAI);
 	TPessoaInsert(arv->pessoa->pai,avaP,MAE);
 	//
-	TPessoa* avoPM = TPessoaCreate("AMANDIOM");
-    TPessoa* avoPP = TPessoaCreate("AMANDIOP");
+	TPessoa* avoPM = TPessoaCreate("PAIAVOPATERNO");
+    TPessoa* avoPP = TPessoaCreate("MAEAVOPATERNO");
 	TPessoaInsert(arv->pessoa->pai->pai,avoPP,PAI);
 	TPessoaInsert(arv->pessoa->pai->pai,avoPM,MAE);
 	//
-	TPessoa* avoPMP = TPessoaCreate("MARCINAMP");
-    TPessoa* avoPPP = TPessoaCreate("MARCINAPP");
+	TPessoa* avoPMP = TPessoaCreate("PAIAVOHPATERNO");
+    TPessoa* avoPPP = TPessoaCreate("MAEAVOHPATERNO");
 	TPessoaInsert(arv->pessoa->pai->mae,avoPPP,PAI);
 	TPessoaInsert(arv->pessoa->pai->mae,avoPMP,MAE);
 	//
 	
-	TPessoa* avoM = TPessoaCreate("DORVALINO");
-    TPessoa* avaM = TPessoaCreate("VILMA");
+	TPessoa* avoM = TPessoaCreate("AVOMATERNO");
+    TPessoa* avaM = TPessoaCreate("AVOHMATERNA");
 	TPessoaInsert(arv->pessoa->mae,avoM,PAI);
 	TPessoaInsert(arv->pessoa->mae,avaM,MAE);
 	//
-	TPessoa* avoMM = TPessoaCreate("DORVALINOM");
-    TPessoa* avoMP = TPessoaCreate("DORVALINOP");
+	TPessoa* avoMM = TPessoaCreate("PAIAVOMATERNO");
+    TPessoa* avoMP = TPessoaCreate("MAEAVOMATERNO");
 	TPessoaInsert(arv->pessoa->mae->pai,avoMP,PAI);
 	TPessoaInsert(arv->pessoa->mae->pai,avoMM,MAE);
 	//
-	TPessoa* avoMMP = TPessoaCreate("VILMAMP");
-    TPessoa* avoMPP = TPessoaCreate("VILMAPP");
+	TPessoa* avoMMP = TPessoaCreate("PAIAVOHMATERNA");
+    TPessoa* avoMPP = TPessoaCreate("MAEAVOHMATERNA");
 	TPessoaInsert(arv->pessoa->mae->mae,avoMPP,PAI);
 	TPessoaInsert(arv->pessoa->mae->mae,avoMMP,MAE);
 		
-	TPessoaInOrdem(arv->pessoa);
+	TPessoaPreOrdem(arv->pessoa);
 	printf("\n");
 
   	TPessoaWrite(arv->pessoa);
-  	TPessoaRead();
+  	TArvoreRead();
     
     /*
     *opcao = 0;

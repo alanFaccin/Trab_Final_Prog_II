@@ -18,6 +18,8 @@ typedef struct Arvore {
 
 TArvore* arv;
 TArvore* arvore_file;
+TArvore* arvore_test;
+
 
 //constantes que identificam o tipo de registro
 const TTipo PAI = 0;
@@ -105,7 +107,7 @@ void TPessoaWrite(TPessoa* pessoa)
 {
 	if(!TPessoaVazia(pessoa))
 	{
-		TPessoaWrite(pessoa->pai);
+		
 		
 		int r;
 		FILE *fp;
@@ -129,6 +131,8 @@ void TPessoaWrite(TPessoa* pessoa)
 			}
 			fclose(fp);
 			
+			
+			TPessoaWrite(pessoa->pai);
 			TPessoaWrite(pessoa->mae);
 			
 	}
@@ -154,18 +158,26 @@ void TPessoaRead()
 		if(fread(leitura,sizeof(TPessoa),1,fp) ==1){
 			
 				if(!TPessoaVazia(leitura)){
-					printf("%s\n",leitura->nome);
+					//printf("%s\n",leitura->nome);
 					
-				/*
+				
 					// se a arvore for vazia
 					if(i==0){
 						//puts("Pessoa vazia");
-						arvore_file->pessoa = TPessoaCreate(leitura->nome);
-						TPessoaInOrdem(arvore_file->pessoa);
+						//arvore_file->pessoa = TPessoaCreate(leitura->nome);
+						arvore_file->pessoa = leitura;
+						//TPessoaInOrdem(arvore_file->pessoa);
+						
 					}
-				*/	
+					/*
+					if(i==1){
+						TPessoaInsert(arvore_file->pessoa,leitura,PAI);
+						puts("inseriu o pai");
 					
-				//	TPessoaInsert(arvore_file->pessoa,pai,PAI);
+					}
+					*/
+					TPessoaPreOrdem(arvore_file->pessoa);
+					
 					
 				}else{
 					puts("pessoa com fome");
@@ -177,13 +189,37 @@ void TPessoaRead()
 		i++;	
 			
 		}
-	
 							
 	}else{
 		puts ("Erro ao abrir o arquivo leitura");
 	}
 	
 }
+
+void TArvoreRead()
+{
+	int r,i=0;
+	FILE *fp;
+	arvore_test = TArvoreCreate();
+	fp = fopen("F:\\arvore.bin","rb");
+	// tenta abrir o arquivo
+	if(fp){	
+		
+		if(fread(arvore_test,sizeof(TArvore),1,fp) ==1){
+			
+					TPessoaPreOrdem(arvore_test->pessoa);			
+						
+		}else{
+			puts("Problema ao ler do arquivo ");
+		}
+		i++;	
+			
+		}else{
+		puts ("Erro ao abrir o arquivo leitura");
+		}
+	
+}
+
 
 
 
