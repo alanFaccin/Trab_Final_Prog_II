@@ -15,97 +15,126 @@
 TPessoa* ultimo;
 
 int opcao=0;
+char * temp;
 
 int main(int argc, const char * argv[]) {
     
-    arv = TArvoreCreate();
- 	arv->pessoa = TPessoaCreate("PESSOA");
- 	//
-	TPessoa* pai = TPessoaCreate("PAI");
-	TPessoa* mae = TPessoaCreate("MAE");
-    TPessoaInsert(arv->pessoa,pai,PAI);
-	TPessoaInsert(arv->pessoa,mae,MAE);
-	//
-	TPessoa* avoP = TPessoaCreate("AVOPATERNO");
-    TPessoa* avaP = TPessoaCreate("AVOHPATERNA");
-	TPessoaInsert(arv->pessoa->pai,avoP,PAI);
-	TPessoaInsert(arv->pessoa->pai,avaP,MAE);
-	//
-	TPessoa* avoPM = TPessoaCreate("PAIAVOPATERNO");
-    TPessoa* avoPP = TPessoaCreate("MAEAVOPATERNO");
-	TPessoaInsert(arv->pessoa->pai->pai,avoPP,PAI);
-	TPessoaInsert(arv->pessoa->pai->pai,avoPM,MAE);
-	//
-	TPessoa* avoPMP = TPessoaCreate("PAIAVOHPATERNO");
-    TPessoa* avoPPP = TPessoaCreate("MAEAVOHPATERNO");
-	TPessoaInsert(arv->pessoa->pai->mae,avoPPP,PAI);
-	TPessoaInsert(arv->pessoa->pai->mae,avoPMP,MAE);
-	//
-	
-	TPessoa* avoM = TPessoaCreate("AVOMATERNO");
-    TPessoa* avaM = TPessoaCreate("AVOHMATERNA");
-	TPessoaInsert(arv->pessoa->mae,avoM,PAI);
-	TPessoaInsert(arv->pessoa->mae,avaM,MAE);
-	//
-	TPessoa* avoMM = TPessoaCreate("PAIAVOMATERNO");
-    TPessoa* avoMP = TPessoaCreate("MAEAVOMATERNO");
-	TPessoaInsert(arv->pessoa->mae->pai,avoMP,PAI);
-	TPessoaInsert(arv->pessoa->mae->pai,avoMM,MAE);
-	//
-	TPessoa* avoMMP = TPessoaCreate("PAIAVOHMATERNA");
-    TPessoa* avoMPP = TPessoaCreate("MAEAVOHMATERNA");
-	TPessoaInsert(arv->pessoa->mae->mae,avoMPP,PAI);
-	TPessoaInsert(arv->pessoa->mae->mae,avoMMP,MAE);
-		
-	TPessoaPreOrdem(arv->pessoa);
-	printf("\n");
-
-  	TPessoaWrite(arv->pessoa);
-  	arvore_test = TPessoaRead();
-  	puts("inicio impressao arvore arquivo");
-  	TPessoaPreOrdem(arvore_test->pessoa);
-  	puts("inicio impressao arvore arquivo");
-  	
-  	
-  	
-	//TArvoreRead();
+    temp = (char*) malloc(sizeof(char*));
     
-    /*
-    *opcao = 0;
-    
-    menu();
-    
-    while (*opcao <= 5) {
-        switch (*opcao) {
+    while (opcao <= 5) {
+		menu();
+    	scanf("%d",&opcao);
+    	    
+			switch (opcao) {
             case 1:
-                puts("opcao 1");
+                puts("Vamos comecar com a construcao da arvore !! /n/n Ela sera composta por 3 geracoes");
+                arv = TArvoreCreate();
+                puts("Digite o seu nome");
+                scanf("%s",temp);
+			 	arv->pessoa = TPessoaCreate(temp);
+			 	//
+			 	puts("Digite o nome do seu pai");
+			 	scanf("%s",temp);
+				TPessoa* pai = TPessoaCreate(temp);
+				TPessoaInsert(arv->pessoa,pai,PAI);
+				puts("Digite o nome da sua mae");
+			 	scanf("%s",temp);
+				TPessoa* mae = TPessoaCreate(temp);
+				TPessoaInsert(arv->pessoa,mae,MAE);
+				
+				//
+				puts("Digite o nome do seu avo Paterno");
+			 	scanf("%s",temp);
+				TPessoa* avoP = TPessoaCreate(temp);
+				TPessoaInsert(arv->pessoa->pai,avoP,PAI);
+				puts("Digite o nome do sua avoh Paterna");
+			 	scanf("%s",temp);
+			    TPessoa* avaP = TPessoaCreate(temp);
+				TPessoaInsert(arv->pessoa->pai,avaP,MAE);
+				//
+				puts("Digite o nome do pai do seu avo Paterno");
+			 	scanf("%s",temp);
+				TPessoa* avoPM = TPessoaCreate(temp);
+				TPessoaInsert(arv->pessoa->pai->pai,avoPM,PAI);
+				puts("Digite o nome da mae do seu avo Paterno");
+			 	scanf("%s",temp);
+			    TPessoa* avoPP = TPessoaCreate(temp);
+				TPessoaInsert(arv->pessoa->pai->pai,avoPP,MAE);
+				
+				//
+				puts("Digite o nome do pai da sua avoh Paterna");
+			 	scanf("%s",temp);
+				TPessoa* avoPMP = TPessoaCreate(temp);
+				TPessoaInsert(arv->pessoa->pai->mae,avoPMP,PAI);
+				puts("Digite o nome da mae da sua avoh Paterna");
+			 	scanf("%s",temp);
+			    TPessoa* avoPPP = TPessoaCreate(temp);
+				TPessoaInsert(arv->pessoa->pai->mae,avoPPP,MAE);
+				
+				//
+				puts("Digite o nome do seu avo materno");
+			 	scanf("%s",temp);
+				TPessoa* avoM = TPessoaCreate(temp);
+				TPessoaInsert(arv->pessoa->mae,avoM,PAI);
+				puts("Digite o nome da sua avoh materna");
+			 	scanf("%s",temp);
+			    TPessoa* avaM = TPessoaCreate(temp);
+				TPessoaInsert(arv->pessoa->mae,avaM,MAE);
+				
+				//
+				puts("Digite o nome do pai do seu avo materno");
+			 	scanf("%s",temp);
+				TPessoa* avoMM = TPessoaCreate(temp);
+				TPessoaInsert(arv->pessoa->mae->pai,avoMM,PAI);
+				puts("Digite o nome da mae do seu avo materno");
+			 	scanf("%s",temp);
+			    TPessoa* avoMP = TPessoaCreate(temp);
+				TPessoaInsert(arv->pessoa->mae->pai,avoMP,MAE);
+				
+				//
+				puts("Digite o nome do pai da sua avoh materna");
+			 	scanf("%s",temp);
+				TPessoa* avoMMP = TPessoaCreate(temp);
+				TPessoaInsert(arv->pessoa->mae->mae,avoMMP,PAI);
+				puts("Digite o nome da mae da sua avoh materna");
+			 	scanf("%s",temp);
+			    TPessoa* avoMPP = TPessoaCreate(temp);
+				TPessoaInsert(arv->pessoa->mae->mae,avoMPP,MAE);
+				puts("Muito bem Terminamos a construao da arvore !");
+                
                 break;
             case 2:
-                puts("opcao 2");
+                TPessoaWrite(arv->pessoa);
+                puts("Gravado com Sucesso!");
                 break;
             case 3:
-                puts("opcao 3");
+                  	arv = TPessoaRead();
+  					puts("inicio impressao arvore arquivo");
+  					TPessoaPreOrdem(arv->pessoa);
+  					puts("inicio impressao arvore arquivo");
                 break;
             case 4:
-                puts("opcao 4");
+                TPessoaPreOrdem(arv->pessoa);
                 break;
             case 5:
                 puts("opcao 5");
                 break;
+        	case 6:
+                puts("Obrigado por usar Arvore Genealogica !!");
+                break;
             default:
                 puts("Opcao invalida !! Selecione uma opcao do menu");
                 menu();
+                scanf("%d",&opcao);
                 break;
         }
-        
+		   
     }
     
-    */
     return 0;
-
-			    
+	    
 }
-/*
+
 void menu (){
 
 
@@ -116,9 +145,10 @@ void menu (){
     puts("|#  3 - Carregar do Arquivo                        #|");
     puts("|#  4 - Visualizar Arvore                          #|");
     puts("|#  5 - Pesquisar Pessoa                           #|");
+    puts("|#  6 - Sair                                       #|\n");
     puts("========== ############################### ==========");
-    scanf("%d",opcao);
+  
 
 }
-*/
+
 

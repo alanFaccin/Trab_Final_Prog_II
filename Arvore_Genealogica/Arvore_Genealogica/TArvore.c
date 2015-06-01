@@ -164,28 +164,28 @@ TArvore* TPessoaRead()
 					if(i==0){
 						
 						arvore_file->pessoa = TPessoaCreate(leitura->nome);
-						puts("inseriu a pessoa");
+						//puts("inseriu a pessoa");
 					}
 					
 					if(i==1){
 						TPessoa* pai = TPessoaCreate(leitura->nome);
 						TPessoaInsert(arvore_file->pessoa,pai,PAI);
-						puts("inseriu o pai");
+						//puts("inseriu o pai");
 					}
 					if(i==2){
 						TPessoa* avoP = TPessoaCreate(leitura->nome);
 						TPessoaInsert(arvore_file->pessoa->pai,avoP,PAI);
-						puts("inseriu o avopaterno");
+						//puts("inseriu o avopaterno");
 					}
 					if(i==3){
 						TPessoa* avoPP = TPessoaCreate(leitura->nome);
 						TPessoaInsert(arvore_file->pessoa->pai->pai,avoPP,MAE);
-						puts("inseriu o maeavopaterno");
+						//puts("inseriu o maeavopaterno");
 					}
 					if(i==4){
 						TPessoa* avoPM = TPessoaCreate(leitura->nome);
 						TPessoaInsert(arvore_file->pessoa->pai->pai,avoPM,PAI);
-						puts("inseriu o paiavopaterno");
+						//puts("inseriu o paiavopaterno");
 					}
 					
 					
@@ -197,7 +197,7 @@ TArvore* TPessoaRead()
 			puts("Problema ao ler do arquivo ");
 		}
 		i++;
-		printf("%i",i);	
+		//printf("%i",i);	
 			
 		}
 							
