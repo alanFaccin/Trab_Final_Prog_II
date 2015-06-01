@@ -61,7 +61,14 @@ int main(int argc, const char * argv[]) {
 	printf("\n");
 
   	TPessoaWrite(arv->pessoa);
-  	TArvoreRead();
+  	arvore_test = TPessoaRead();
+  	puts("inicio impressao arvore arquivo");
+  	TPessoaPreOrdem(arvore_test->pessoa);
+  	puts("inicio impressao arvore arquivo");
+  	
+  	
+  	
+	//TArvoreRead();
     
     /*
     *opcao = 0;

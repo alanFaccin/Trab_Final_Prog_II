@@ -112,7 +112,7 @@ void TPessoaWrite(TPessoa* pessoa)
 		
 		int r;
 		FILE *fp;
-		fp = fopen("F:\\arvore.bin","ab");
+		fp = fopen("D:\\arvore.bin","ab");
 		
 		if(fp){
 			
@@ -141,43 +141,52 @@ void TPessoaWrite(TPessoa* pessoa)
 
 /// teste ler arvore arquivo 
 
-void TPessoaRead()
+TArvore* TPessoaRead()
 {
 	int r,i=0;
 	FILE *fp;
-	TPessoa* leitura;
-	arvore_file = TArvoreCreate();
-	fp = fopen("F:\\arvore.bin","rb");
+	TPessoa* leitura;// utilizado para ler cada uma das pessoas que estão gravados no arquivo
+	arvore_file = TArvoreCreate(); //crinado e alocandao memoria para a arvore que será lida do arquivo
+	fp = fopen("D:\\arvore.bin","rb"); // abre o arquivo binario que contém a arvore salva 
 	// tenta abrir o arquivo
 	if(fp){	
-	
-	    leitura = malloc (sizeof(TPessoa*));
-		while(!feof(fp)){
+	    leitura = malloc (sizeof(TPessoa));// aloca memoria para uma estrutura Tpessoa
+		while(!feof(fp)){ // enquanto não chegar no final do arquivo
 	    
-		fseek(fp,sizeof(TPessoa)*i,SEEK_SET);
+		fseek(fp,sizeof(TPessoa)*i,SEEK_SET); // a cada iteração do while faz um salto do tamannho de uma sctruct pessoa no arquivo
 		
 		if(fread(leitura,sizeof(TPessoa),1,fp) ==1){
 			
 				if(!TPessoaVazia(leitura)){
 					//printf("%s\n",leitura->nome);
-					
 				
 					// se a arvore for vazia
 					if(i==0){
-						//puts("Pessoa vazia");
-						//arvore_file->pessoa = TPessoaCreate(leitura->nome);
-						arvore_file->pessoa = leitura;
-						//TPessoaInOrdem(arvore_file->pessoa);
 						
+						arvore_file->pessoa = TPessoaCreate(leitura->nome);
+						puts("inseriu a pessoa");
 					}
-					/*
-					if(i==1){
-						TPessoaInsert(arvore_file->pessoa,leitura,PAI);
-						puts("inseriu o pai");
 					
+					if(i==1){
+						TPessoa* pai = TPessoaCreate(leitura->nome);
+						TPessoaInsert(arvore_file->pessoa,pai,PAI);
+						puts("inseriu o pai");
 					}
-					*/
-					TPessoaPreOrdem(arvore_file->pessoa);
+					if(i==2){
+						TPessoa* avoP = TPessoaCreate(leitura->nome);
+						TPessoaInsert(arvore_file->pessoa->pai,avoP,PAI);
+						puts("inseriu o avopaterno");
+					}
+					if(i==3){
+						TPessoa* avoPP = TPessoaCreate(leitura->nome);
+						TPessoaInsert(arvore_file->pessoa->pai->pai,avoPP,MAE);
+						puts("inseriu o maeavopaterno");
+					}
+					if(i==4){
+						TPessoa* avoPM = TPessoaCreate(leitura->nome);
+						TPessoaInsert(arvore_file->pessoa->pai->pai,avoPM,PAI);
+						puts("inseriu o paiavopaterno");
+					}
 					
 					
 				}else{
@@ -187,28 +196,32 @@ void TPessoaRead()
 		}else{
 			puts("Problema ao ler do arquivo ");
 		}
-		i++;	
+		i++;
+		printf("%i",i);	
 			
 		}
 							
 	}else{
 		puts ("Erro ao abrir o arquivo leitura");
 	}
-	
+	//TPessoaPreOrdem(arvore_file->pessoa);
+	return arvore_file;
 }
-
+/*
 void TArvoreRead()
 {
 	int r,i=0;
 	FILE *fp;
 	arvore_test = TArvoreCreate();
-	fp = fopen("F:\\arvore.bin","rb");
+	TPessoa* test;
+	fp = fopen("D:\\arvore.bin","rb");
 	// tenta abrir o arquivo
 	if(fp){	
+		test = malloc (sizeof(TPessoa));
 		
-		if(fread(arvore_test,sizeof(TArvore),1,fp) ==1){
+		if(fread(test,sizeof(TPessoa),1,fp) ==1){
 			
-					TPessoaPreOrdem(arvore_test->pessoa);			
+					arvore_test->pessoa = TPessoaCreate(test->nome);			
 						
 		}else{
 			puts("Problema ao ler do arquivo ");
@@ -218,10 +231,13 @@ void TArvoreRead()
 		}else{
 		puts ("Erro ao abrir o arquivo leitura");
 		}
-	
+	fclose(fp);
+	puts("impressao do arquivo");
+	TPessoaPreOrdem(arvore_test->pessoa);
+	puts("fim impressao arquivo");
 }
 
-
+*/
 
 
 
