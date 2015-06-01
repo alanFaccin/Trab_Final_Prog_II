@@ -109,7 +109,7 @@ void TPessoaWrite(TPessoa* pessoa)
 		
 		int r;
 		FILE *fp;
-		fp = fopen("E:\\arvore.bin","ab");
+		fp = fopen("F:\\arvore.bin","ab");
 		
 		if(fp){
 			
@@ -117,7 +117,7 @@ void TPessoaWrite(TPessoa* pessoa)
 			
 			if(r == 1){	
 				
-			puts ("gravou arquivo");
+			//puts ("gravou arquivo");
 							
 			}else{
 					puts ("Erro ao gravar estrutura");
@@ -142,7 +142,7 @@ void TPessoaRead()
 	FILE *fp;
 	TPessoa* leitura;
 	arvore_file = TArvoreCreate();
-	fp = fopen("E:\\arvore.bin","rb");
+	fp = fopen("F:\\arvore.bin","rb");
 	// tenta abrir o arquivo
 	if(fp){	
 	
