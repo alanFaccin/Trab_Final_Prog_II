@@ -19,8 +19,8 @@ char * temp;
 
 int main(int argc, const char * argv[]) {
     
-    temp = (char*) malloc(sizeof(char*));
-    
+    //temp = (char*) malloc(sizeof(char*));
+    char temp[100];
     while (opcao <= 5) {
 		menu();
     	scanf("%d",&opcao);
@@ -117,7 +117,7 @@ int main(int argc, const char * argv[]) {
                 TPessoaPreOrdem(arv->pessoa);
                 break;
             case 5:
-                printf("->Informe o nome do pessoa para a consulta");
+                printf("->Informe o nome do pessoa para a consulta:\n");
                	scanf("%s",temp);
                 TPessoaPesquisar(arv->pessoa,temp);
                 break;

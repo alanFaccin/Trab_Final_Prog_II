@@ -8,7 +8,7 @@
 #define MAX 15
 
 typedef struct Pessoa {
-	char* nome;
+	char nome[100];
 	TPessoa* pai;
 	TPessoa* mae;
 } TPessoa;
@@ -40,7 +40,7 @@ TArvore* TArvoreCreate()
 TPessoa* TPessoaCreate(char* nome)
 {
 	TPessoa* pessoa = (TPessoa*) malloc(sizeof(TPessoa));
-	pessoa->nome = malloc(sizeof(char*)); 
+	//pessoa->nome = (char*) malloc(sizeof(char)); 
 	strcpy(pessoa->nome,nome);
 	pessoa->mae = NULL;
 	pessoa->pai = NULL;
@@ -235,26 +235,32 @@ void TPessoaParentesco(char* pessoa){
 	if(count == 0)
 	{
 		printf("FILHO\n");
+		return;
 	}
 	if(count == 1)
 	{
 		printf("PAI\n");
+		return;
 	}
 	if(count == 2)
 	{
 		printf("AVO PATERNO\n");
+		return;
 	}
 	if(count == 3)
 	{
 		printf("PAI DO AVO PATERNO\n");
+		return;
 	}
 	if(count == 4)
 	{
 		printf("MAE DO AVO PATERNO\n");
+		return;
 	}
 	if(count == 5)
 	{
 		printf("AVÓ PATERNA\n");
+		return;
 	}
 	if(count == 6)
 	{
