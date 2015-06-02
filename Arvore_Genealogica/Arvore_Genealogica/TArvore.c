@@ -5,6 +5,8 @@
 #include "TArvore.h"
 #include "TString.c"
 
+#define MAX 15
+
 typedef struct Pessoa {
 	char* nome;
 	TPessoa* pai;
@@ -21,7 +23,7 @@ TArvore* arv;
 TArvore* arvore_file;
 TArvore* arvore_test;
 
-
+int count = -1;
 //constantes que identificam o tipo de registro
 const TTipo PAI = 0;
 const TTipo MAE = 1;   
@@ -206,6 +208,91 @@ TArvore* TPessoaRead()
 	}
 	//TPessoaPreOrdem(arvore_file->pessoa);
 	return arvore_file;
+}
+
+void TPessoaPesquisar(TPessoa* pessoa,char* nome)
+{
+	if(!TPessoaVazia(pessoa))
+	{
+		if(!strcmp(pessoa->nome,nome)){
+			count++;
+			TPessoaPesquisar(pessoa->pai,nome);
+			count++;
+			TPessoaPesquisar(pessoa->mae,nome);
+			return;	
+		}
+		TPessoaParentesco(nome);
+	}
+	else 
+	{
+		printf("Pessoa nao encontrada com o parâmetro informado.\n");
+		count = 0;
+	}
+}
+
+
+void TPessoaParentesco(char* pessoa){
+	if(count == 0)
+	{
+		printf("FILHO\n");
+	}
+	if(count == 1)
+	{
+		printf("PAI\n");
+	}
+	if(count == 2)
+	{
+		printf("AVO PATERNO\n");
+	}
+	if(count == 3)
+	{
+		printf("PAI DO AVO PATERNO\n");
+	}
+	if(count == 4)
+	{
+		printf("MAE DO AVO PATERNO\n");
+	}
+	if(count == 5)
+	{
+		printf("AVÓ PATERNA\n");
+	}
+	if(count == 6)
+	{
+		printf("PAI DA AVÓ PATERNA\n");
+	}
+	if(count == 7)
+	{
+		printf("MAE DA AVÓ PATERNA\n");
+	}
+	if(count == 8)
+	{
+		printf("MAE\n");
+	}
+	if(count == 9)
+	{
+		printf("AVO MATERNO\n");
+	}
+	if(count == 10)
+	{
+		printf("PAI DA AVO MATERNA\n");
+	}
+	if(count == 11)
+	{
+		printf("MAE DA AVO MATERNA\n");
+	}
+	if(count == 12)
+	{
+		printf("AVÓ MATERNA\n");
+	}
+	if(count == 13)
+	{
+		printf("PAI DA AVÓ MATERNA\n");
+	}
+	if(count == 14)
+	{
+		printf("MAE DA AVÓ MATERNA\n");
+	}
+	count = 0;
 }
 /*
 void TArvoreRead()

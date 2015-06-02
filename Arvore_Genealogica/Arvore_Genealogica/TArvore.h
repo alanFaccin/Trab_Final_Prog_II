@@ -24,3 +24,8 @@ void TPessoaPosOrdem(TPessoa* pessoa);
 void TPessoaInOrdem(TPessoa* pessoa);
 
 int TPessoaVazia(TPessoa* pessoa);
+
+void TPessoaPesquisar(TPessoa* pessoa,char* nome);
+
+void TPessoaParentesco(char* pessoa);
+

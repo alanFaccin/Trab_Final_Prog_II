@@ -117,7 +117,9 @@ int main(int argc, const char * argv[]) {
                 TPessoaPreOrdem(arv->pessoa);
                 break;
             case 5:
-                puts("opcao 5");
+                printf("->Informe o nome do pessoa para a consulta");
+               	scanf("%s",temp);
+                TPessoaPesquisar(arv->pessoa,temp);
                 break;
         	case 6:
                 puts("Obrigado por usar Arvore Genealogica !!");
