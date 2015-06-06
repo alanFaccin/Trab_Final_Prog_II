@@ -109,35 +109,28 @@ int TPessoaVazia(TPessoa* pessoa)
 void TPessoaWrite(TPessoa* pessoa)
 {
 	if(!TPessoaVazia(pessoa))
-	{
-		
-		
+	{	
 		int r;
 		FILE *fp;
-		fp = fopen("D:\\arvore.bin","ab");
-		
-		if(fp){
-			
-			r= fwrite(pessoa,sizeof(TPessoa),1,fp);
-			
+		fp = fopen("arvore.bin","ab");
+		if(fp)
+		{
+			r= fwrite(pessoa,sizeof(TPessoa),1,fp);	
 			if(r == 1){	
-				
-			//puts ("gravou arquivo");
-							
-			}else{
-					puts ("Erro ao gravar estrutura");
-				}
-				
+				puts (" estrutura de dados gravada com sucesso.");			
 			}
-			else{
-				puts("Erro ao abrir o arquivo para gravacao");
+			else
+			{
+				puts ("Erro ao gravar estrutura.");
 			}
-			fclose(fp);
-			
-			
-			TPessoaWrite(pessoa->pai);
-			TPessoaWrite(pessoa->mae);
-			
+		}
+		else
+		{
+			puts("Erro ao abrir o arquivo para gravacao");
+		}
+		fclose(fp);
+		TPessoaWrite(pessoa->pai);
+		TPessoaWrite(pessoa->mae);
 	}
 }
 
@@ -149,64 +142,110 @@ TArvore* TPessoaRead()
 	FILE *fp;
 	TPessoa* leitura;// utilizado para ler cada uma das pessoas que estão gravados no arquivo
 	arvore_file = TArvoreCreate(); //crinado e alocandao memoria para a arvore que será lida do arquivo
-	fp = fopen("D:\\arvore.bin","rb"); // abre o arquivo binario que contém a arvore salva 
+	fp = fopen("arvore.bin","rb"); // abre o arquivo binario que contém a arvore salva 
 	// tenta abrir o arquivo
-	if(fp){	
-	    leitura = malloc (sizeof(TPessoa));// aloca memoria para uma estrutura Tpessoa
-		while(!feof(fp)){ // enquanto não chegar no final do arquivo
-	    
-		fseek(fp,sizeof(TPessoa)*i,SEEK_SET); // a cada iteração do while faz um salto do tamannho de uma sctruct pessoa no arquivo
-		
-		if(fread(leitura,sizeof(TPessoa),1,fp) ==1){
-			
-				if(!TPessoaVazia(leitura)){
-					//printf("%s\n",leitura->nome);
-				
+	if(fp != NULL)
+	{	
+	    leitura = (TPessoa*) malloc (sizeof(TPessoa));// aloca memoria para uma estrutura Tpessoa
+		while(!feof(fp))
+		{ // enquanto não chegar no final do arquivo
+	    	fseek(fp,sizeof(TPessoa)*i,SEEK_SET); // a cada iteração do while faz um salto do tamannho de uma sctruct pessoa no arquivo
+			if(fread(leitura,sizeof(TPessoa),1,fp) ==1)
+			{
+				if(!TPessoaVazia(leitura))
+				{
 					// se a arvore for vazia
-					if(i==0){
-						
+					if(i==RAIZ)
+					{
 						arvore_file->pessoa = TPessoaCreate(leitura->nome);
-						//puts("inseriu a pessoa");
 					}
-					
-					if(i==1){
+					if(i==_PAI)
+					{
 						TPessoa* pai = TPessoaCreate(leitura->nome);
 						TPessoaInsert(arvore_file->pessoa,pai,PAI);
-						//puts("inseriu o pai");
 					}
-					if(i==2){
+					if(i==AVOP)
+					{
 						TPessoa* avoP = TPessoaCreate(leitura->nome);
 						TPessoaInsert(arvore_file->pessoa->pai,avoP,PAI);
-						//puts("inseriu o avopaterno");
 					}
-					if(i==3){
-						TPessoa* avoPP = TPessoaCreate(leitura->nome);
-						TPessoaInsert(arvore_file->pessoa->pai->pai,avoPP,MAE);
-						//puts("inseriu o maeavopaterno");
+					if(i==BISAVOPPA)
+					{
+						TPessoa* bisavoPPA = TPessoaCreate(leitura->nome);
+						TPessoaInsert(arvore_file->pessoa->pai->pai,bisavoPPA,PAI);
 					}
-					if(i==4){
-						TPessoa* avoPM = TPessoaCreate(leitura->nome);
-						TPessoaInsert(arvore_file->pessoa->pai->pai,avoPM,PAI);
-						//puts("inseriu o paiavopaterno");
+					if(i==BISAVOPMA)
+					{
+						TPessoa* avoPMA = TPessoaCreate(leitura->nome);
+						TPessoaInsert(arvore_file->pessoa->pai->pai,avoPMA,MAE);
 					}
-					
-					
-				}else{
+					if(i==AVOHP)
+					{
+						TPessoa* avohp = TPessoaCreate(leitura->nome);
+						TPessoaInsert(arvore_file->pessoa->pai,avohp,MAE);
+					}
+					if(i==BISAVOPPB)
+					{
+						TPessoa* bisavoPPB = TPessoaCreate(leitura->nome);
+						TPessoaInsert(arvore_file->pessoa->pai->mae,bisavoPPB,PAI);
+					}
+					if(i==BISAVOPMB)
+					{
+						TPessoa* bisavoPMB = TPessoaCreate(leitura->nome);
+						TPessoaInsert(arvore_file->pessoa->pai->mae,bisavoPMB,MAE);
+					}
+					if(i==_MAE)
+					{
+						TPessoa* mae = TPessoaCreate(leitura->nome);
+						TPessoaInsert(arvore_file->pessoa,mae,MAE);
+					}
+					if(i==AVOM)
+					{
+						TPessoa* avoM = TPessoaCreate(leitura->nome);
+						TPessoaInsert(arvore_file->pessoa->mae,avoM,PAI);
+					}
+					if(i==BISAVOMPA)
+					{
+						TPessoa* bisavoMPA = TPessoaCreate(leitura->nome);
+						TPessoaInsert(arvore_file->pessoa->mae->pai,bisavoMPA,PAI);
+					}
+					if(i==BISAVOMMA)
+					{
+						TPessoa* bisavoMMA = TPessoaCreate(leitura->nome);
+						TPessoaInsert(arvore_file->pessoa->mae->pai,bisavoMMA,MAE);
+					}
+					if(i==AVOHM)
+					{
+						TPessoa* avohM = TPessoaCreate(leitura->nome);
+						TPessoaInsert(arvore_file->pessoa->mae,avohM,MAE);
+					}
+					if(i==BISAVOMPB)
+					{
+						TPessoa* bisavoMPB = TPessoaCreate(leitura->nome);
+						TPessoaInsert(arvore_file->pessoa->mae->mae,bisavoMPB,PAI);
+					}
+					if(i==BISAVOMMB)
+					{
+						TPessoa* bisavoMMB = TPessoaCreate(leitura->nome);
+						TPessoaInsert(arvore_file->pessoa->mae->mae,bisavoMMB,MAE);
+					}				
+				}
+				else
+				{
 					puts("pessoa com fome");
-				}				
-						
-		}else{
-			puts("Problema ao ler do arquivo ");
-		}
-		i++;
-		//printf("%i",i);	
-			
-		}
-							
-	}else{
+				}							
+			}
+			else
+			{
+				puts("Problema ao ler do arquivo ");
+			}
+			i++;	
+		}						
+	}
+	else
+	{
 		puts ("Erro ao abrir o arquivo leitura");
 	}
-	//TPessoaPreOrdem(arvore_file->pessoa);
 	return arvore_file;
 }
 
