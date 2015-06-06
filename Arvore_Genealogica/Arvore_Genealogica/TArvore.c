@@ -235,10 +235,10 @@ TArvore* TPessoaRead()
 					puts("pessoa com fome");
 				}							
 			}
-			else
+			/*else
 			{
 				puts("Problema ao ler do arquivo ");
-			}
+			}*/
 			i++;	
 		}						
 	}

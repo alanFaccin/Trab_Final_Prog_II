@@ -3,7 +3,6 @@
 #include "TArvore.c"
 #include "TString.h"
 
-
 //
 //  main.c
 //  Arvore_Genealogica
@@ -11,21 +10,17 @@
 //  Created by Alan Jhones Faccin  Diovani B. da Motta e Rafael Pablo Massocato on 5/25/15.
 //  Copyright (c) 2015 Alan Jhones Faccin Diovani B. da Motta e Rafael Pablo Massocato. All rights reserved.
 //
-
-TPessoa* ultimo;
-
+//TPessoa* ultimo;
 int opcao=0;
 char * temp;
 
-int main(int argc, const char * argv[]) {
-    
-    //temp = (char*) malloc(sizeof(char*));
+int main(int argc, const char * argv[]) 
+{
     char temp[100];
     while (opcao <= 5) {
 		menu();
     	scanf("%d",&opcao);
-    	    
-			switch (opcao) {
+		switch (opcao) {
             case 1:
                 puts("Vamos comecar com a construcao da arvore !! /n/n Ela sera composta por 3 geracoes");
                 arv = TArvoreCreate();
@@ -60,7 +55,6 @@ int main(int argc, const char * argv[]) {
 			 	scanf("%s",temp);
 			    TPessoa* avoPP = TPessoaCreate(temp);
 				TPessoaInsert(arv->pessoa->pai->pai,avoPP,MAE);
-				
 				//
 				puts("Digite o nome do pai da sua avoh Paterna");
 			 	scanf("%s",temp);
@@ -70,7 +64,6 @@ int main(int argc, const char * argv[]) {
 			 	scanf("%s",temp);
 			    TPessoa* avoPPP = TPessoaCreate(temp);
 				TPessoaInsert(arv->pessoa->pai->mae,avoPPP,MAE);
-				
 				//
 				puts("Digite o nome do seu avo materno");
 			 	scanf("%s",temp);
@@ -108,10 +101,11 @@ int main(int argc, const char * argv[]) {
                 puts("Gravado com Sucesso!");
                 break;
             case 3:
-                  	arv = TPessoaRead();
-  					puts("inicio impressao arvore arquivo");
-  					TPessoaPreOrdem(arv->pessoa);
-  					puts("inicio impressao arvore arquivo");
+            	 arv = NULL; 	
+                 arv = TPessoaRead();
+				 puts("inicio impressao arvore arquivo");
+				 TPessoaPreOrdem(arv->pessoa);
+				 puts("fim  impressao arvore arquivo");
                 break;
             case 4:
                 TPessoaPreOrdem(arv->pessoa);
@@ -129,17 +123,13 @@ int main(int argc, const char * argv[]) {
                 menu();
                 scanf("%d",&opcao);
                 break;
-        }
-		   
+        }   
     }
-    
-    return 0;
-	    
+    return 0;   
 }
 
-void menu (){
-
-
+void menu ()
+{
     puts("========== ##### Arvore Genealogica ##### ==========");
     puts("=#---------- Escolha uma opcao do menu: -----------#= \n");
     puts("|#  1 - Construir Arvore Genealogica               #|");
@@ -149,8 +139,6 @@ void menu (){
     puts("|#  5 - Pesquisar Pessoa                           #|");
     puts("|#  6 - Sair                                       #|\n");
     puts("========== ############################### ==========");
-  
-
 }
 
 
