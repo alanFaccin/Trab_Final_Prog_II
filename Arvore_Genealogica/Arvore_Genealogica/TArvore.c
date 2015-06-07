@@ -249,27 +249,25 @@ int TPessoaPesquisar(TPessoa* pessoa,char* nome)
 	if(!TPessoaVazia(pessoa))
 	{
 		if(strcmp(pessoa->nome,nome) != 0){
-			count++;
+			if(!TPessoaVazia(pessoa->pai))
+			{
+				count++;
+			}
 			int retorno = TPessoaPesquisar(pessoa->pai,nome);
-			printf("-> count: %d\n",retorno);
-			printf("%d\n",retorno);
 			if(retorno == 1)
 				return 1;
-			count++;
+			if(!TPessoaVazia(pessoa->mae))
+			{
+				count++;
+			}
 			retorno = TPessoaPesquisar(pessoa->mae,nome);
 			if(retorno == 1)
 				return 1;
-			else 
-				return 0;
+			else 	
+			   return 0;
 		}
 		TPessoaParentesco(nome);
 		return 1;	
-	}
-	else 
-	{
-		printf("PESSOA NAO ENCONTRADA COM O PARAMETRO INFORMADO.\n");
-		count = 0;
-		return 0;
 	}
 	return 0;
 }
@@ -278,63 +276,82 @@ void TPessoaParentesco(char* pessoa){
 	if(count == 0)
 	{
 		printf("->PARENTESCO: FILHO\n");
+		count = 0;
+
 	}
 	if(count == 1)
 	{
 		printf("->PARENTESCO: PAI\n");
+		count = 0;
 	}
 	if(count == 2)
 	{
 		printf("->PARENTESCO: AVO PATERNO\n");
+		count = 0;
 	}
 	if(count == 3)
 	{
 		printf("->PARENTESCO: PAI DO AVO PATERNO\n");
+		count = 0;
 	}
 	if(count == 4)
 	{
 		printf("->PARENTESCO: MAE DO AVO PATERNO\n");
+		count = 0;
 	}
 	if(count == 5)
 	{
 		printf("->PARENTESCO: AVOH PATERNA\n");
+		count = 0;
 	}
 	if(count == 6)
 	{
 		printf("->PARENTESCO: PAI DA AVOH PATERNA\n");
+		count = 0;
 	}
 	if(count == 7)
 	{
 		printf("->PARENTESCO: MAE DA AVOH PATERNA\n");
+		count = 0;
 	}
 	if(count == 8)
 	{
 		printf("->PARENTESCO: MAE\n");
+		count = 0;
 	}
 	if(count == 9)
 	{
 		printf("->PARENTESCO: AVO MATERNO\n");
+		count = 0;
 	}
 	if(count == 10)
 	{
 		printf("->PARENTESCO: PAI DA AVO MATERNA\n");
+		count = 0;
 	}
 	if(count == 11)
 	{
 		printf("->PARENTESCO: MAE DA AVO MATERNA\n");
+		count = 0;
 	}
 	if(count == 12)
 	{
 		printf("->PARENTESCO: AVOH MATERNA\n");
+		count = 0;
 	}
 	if(count == 13)
 	{
 		printf("->PARENTESCO: PAI DA AVOH MATERNA\n");
+		count = 0;
 	}
 	if(count == 14)
 	{
 		printf("->PARENTESCO: MAE DA AVOH MATERNA\n");
+		count = 0;
 	}
-	count = 0;
+	if(count > 14)
+	{
+		count = 0;
+	}
 }
 
