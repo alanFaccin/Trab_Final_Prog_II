@@ -23,7 +23,7 @@ typedef struct Pessoa TPessoa;
 typedef struct Arvore TArvore;
 typedef int TTipo;
 
-extern TArvore arvore;
+extern TArvore* arv;
 extern const TTipo MAE; 
 extern const TTipo PAI; 
 
@@ -42,7 +42,7 @@ void TPessoaInOrdem(TPessoa* pessoa);
 
 int TPessoaVazia(TPessoa* pessoa);
 
-void TPessoaPesquisar(TPessoa* pessoa,char* nome);
+int TPessoaPesquisar(TPessoa* pessoa,char* nome);
 
 void TPessoaParentesco(char* pessoa);
 

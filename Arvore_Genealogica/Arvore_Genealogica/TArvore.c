@@ -23,7 +23,7 @@ TArvore* arv;
 TArvore* arvore_file;
 TArvore* arvore_test;
 
-int count = -1;
+int count = 0;
 //constantes que identificam o tipo de registro
 const TTipo PAI = 0;
 const TTipo MAE = 1;   
@@ -40,7 +40,6 @@ TArvore* TArvoreCreate()
 TPessoa* TPessoaCreate(char* nome)
 {
 	TPessoa* pessoa = (TPessoa*) malloc(sizeof(TPessoa));
-	//pessoa->nome = (char*) malloc(sizeof(char)); 
 	strcpy(pessoa->nome,nome);
 	pessoa->mae = NULL;
 	pessoa->pai = NULL;
@@ -235,10 +234,6 @@ TArvore* TPessoaRead()
 					puts("pessoa com fome");
 				}							
 			}
-			/*else
-			{
-				puts("Problema ao ler do arquivo ");
-			}*/
 			i++;	
 		}						
 	}
@@ -249,127 +244,97 @@ TArvore* TPessoaRead()
 	return arvore_file;
 }
 
-void TPessoaPesquisar(TPessoa* pessoa,char* nome)
+int TPessoaPesquisar(TPessoa* pessoa,char* nome)
 {
 	if(!TPessoaVazia(pessoa))
 	{
-		if(!strcmp(pessoa->nome,nome)){
+		if(strcmp(pessoa->nome,nome) != 0){
 			count++;
-			TPessoaPesquisar(pessoa->pai,nome);
+			int retorno = TPessoaPesquisar(pessoa->pai,nome);
+			printf("-> count: %d\n",retorno);
+			printf("%d\n",retorno);
+			if(retorno == 1)
+				return 1;
 			count++;
-			TPessoaPesquisar(pessoa->mae,nome);
-			return;	
+			retorno = TPessoaPesquisar(pessoa->mae,nome);
+			if(retorno == 1)
+				return 1;
+			else 
+				return 0;
 		}
 		TPessoaParentesco(nome);
+		return 1;	
 	}
 	else 
 	{
-		printf("Pessoa nao encontrada com o parâmetro informado.\n");
+		printf("PESSOA NAO ENCONTRADA COM O PARAMETRO INFORMADO.\n");
 		count = 0;
+		return 0;
 	}
+	return 0;
 }
-
 
 void TPessoaParentesco(char* pessoa){
 	if(count == 0)
 	{
-		printf("FILHO\n");
-		return;
+		printf("->PARENTESCO: FILHO\n");
 	}
 	if(count == 1)
 	{
-		printf("PAI\n");
-		return;
+		printf("->PARENTESCO: PAI\n");
 	}
 	if(count == 2)
 	{
-		printf("AVO PATERNO\n");
-		return;
+		printf("->PARENTESCO: AVO PATERNO\n");
 	}
 	if(count == 3)
 	{
-		printf("PAI DO AVO PATERNO\n");
-		return;
+		printf("->PARENTESCO: PAI DO AVO PATERNO\n");
 	}
 	if(count == 4)
 	{
-		printf("MAE DO AVO PATERNO\n");
-		return;
+		printf("->PARENTESCO: MAE DO AVO PATERNO\n");
 	}
 	if(count == 5)
 	{
-		printf("AVÓ PATERNA\n");
-		return;
+		printf("->PARENTESCO: AVOH PATERNA\n");
 	}
 	if(count == 6)
 	{
-		printf("PAI DA AVÓ PATERNA\n");
+		printf("->PARENTESCO: PAI DA AVOH PATERNA\n");
 	}
 	if(count == 7)
 	{
-		printf("MAE DA AVÓ PATERNA\n");
+		printf("->PARENTESCO: MAE DA AVOH PATERNA\n");
 	}
 	if(count == 8)
 	{
-		printf("MAE\n");
+		printf("->PARENTESCO: MAE\n");
 	}
 	if(count == 9)
 	{
-		printf("AVO MATERNO\n");
+		printf("->PARENTESCO: AVO MATERNO\n");
 	}
 	if(count == 10)
 	{
-		printf("PAI DA AVO MATERNA\n");
+		printf("->PARENTESCO: PAI DA AVO MATERNA\n");
 	}
 	if(count == 11)
 	{
-		printf("MAE DA AVO MATERNA\n");
+		printf("->PARENTESCO: MAE DA AVO MATERNA\n");
 	}
 	if(count == 12)
 	{
-		printf("AVÓ MATERNA\n");
+		printf("->PARENTESCO: AVOH MATERNA\n");
 	}
 	if(count == 13)
 	{
-		printf("PAI DA AVÓ MATERNA\n");
+		printf("->PARENTESCO: PAI DA AVOH MATERNA\n");
 	}
 	if(count == 14)
 	{
-		printf("MAE DA AVÓ MATERNA\n");
+		printf("->PARENTESCO: MAE DA AVOH MATERNA\n");
 	}
 	count = 0;
 }
-/*
-void TArvoreRead()
-{
-	int r,i=0;
-	FILE *fp;
-	arvore_test = TArvoreCreate();
-	TPessoa* test;
-	fp = fopen("D:\\arvore.bin","rb");
-	// tenta abrir o arquivo
-	if(fp){	
-		test = malloc (sizeof(TPessoa));
-		
-		if(fread(test,sizeof(TPessoa),1,fp) ==1){
-			
-					arvore_test->pessoa = TPessoaCreate(test->nome);			
-						
-		}else{
-			puts("Problema ao ler do arquivo ");
-		}
-		i++;	
-			
-		}else{
-		puts ("Erro ao abrir o arquivo leitura");
-		}
-	fclose(fp);
-	puts("impressao do arquivo");
-	TPessoaPreOrdem(arvore_test->pessoa);
-	puts("fim impressao arquivo");
-}
-
-*/
-
-
 

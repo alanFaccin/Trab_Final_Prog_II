@@ -10,7 +10,6 @@
 //  Created by Alan Jhones Faccin  Diovani B. da Motta e Rafael Pablo Massocato on 5/25/15.
 //  Copyright (c) 2015 Alan Jhones Faccin Diovani B. da Motta e Rafael Pablo Massocato. All rights reserved.
 //
-//TPessoa* ultimo;
 int opcao=0;
 char * temp;
 
@@ -36,7 +35,6 @@ int main(int argc, const char * argv[])
 			 	scanf("%s",temp);
 				TPessoa* mae = TPessoaCreate(temp);
 				TPessoaInsert(arv->pessoa,mae,MAE);
-				
 				//
 				puts("Digite o nome do seu avo Paterno");
 			 	scanf("%s",temp);
@@ -72,8 +70,7 @@ int main(int argc, const char * argv[])
 				puts("Digite o nome da sua avoh materna");
 			 	scanf("%s",temp);
 			    TPessoa* avaM = TPessoaCreate(temp);
-				TPessoaInsert(arv->pessoa->mae,avaM,MAE);
-				
+				TPessoaInsert(arv->pessoa->mae,avaM,MAE);			
 				//
 				puts("Digite o nome do pai do seu avo materno");
 			 	scanf("%s",temp);
@@ -83,7 +80,6 @@ int main(int argc, const char * argv[])
 			 	scanf("%s",temp);
 			    TPessoa* avoMP = TPessoaCreate(temp);
 				TPessoaInsert(arv->pessoa->mae->pai,avoMP,MAE);
-				
 				//
 				puts("Digite o nome do pai da sua avoh materna");
 			 	scanf("%s",temp);
@@ -94,7 +90,6 @@ int main(int argc, const char * argv[])
 			    TPessoa* avoMPP = TPessoaCreate(temp);
 				TPessoaInsert(arv->pessoa->mae->mae,avoMPP,MAE);
 				puts("Muito bem Terminamos a construao da arvore !");
-                
                 break;
             case 2:
                 TPessoaWrite(arv->pessoa);
