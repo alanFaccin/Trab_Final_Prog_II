@@ -110,11 +110,11 @@ int main(int argc, const char * argv[]) {
             case 3:
                   	arv = TPessoaRead();
   					puts("inicio impressao arvore arquivo");
-  					TPessoaInOrdem(arv->pessoa);
-  					puts("FIM impressao arvore arquivo");
+  					TPessoaPreOrdem(arv->pessoa);
+  					puts("inicio impressao arvore arquivo");
                 break;
             case 4:
-                TPessoaInOrdem(arv->pessoa);
+                TPessoaPreOrdem(arv->pessoa);
                 break;
             case 5:
                 puts("opcao 5");

@@ -38,7 +38,7 @@ TArvore* TArvoreCreate()
 TPessoa* TPessoaCreate(char* nome)
 {
 	TPessoa* pessoa = (TPessoa*) malloc(sizeof(TPessoa));
-	pessoa->nome = malloc(sizeof(char)*100); 
+	pessoa->nome = malloc(sizeof(char*)); 
 	strcpy(pessoa->nome,nome);
 	pessoa->mae = NULL;
 	pessoa->pai = NULL;
@@ -112,7 +112,7 @@ void TPessoaWrite(TPessoa* pessoa)
 		
 		int r;
 		FILE *fp;
-		fp = fopen("E:\\arvore.bin","ab");
+		fp = fopen("D:\\arvore.bin","ab");
 		
 		if(fp){
 			
@@ -147,7 +147,7 @@ TArvore* TPessoaRead()
 	FILE *fp;
 	TPessoa* leitura;// utilizado para ler cada uma das pessoas que estão gravados no arquivo
 	arvore_file = TArvoreCreate(); //crinado e alocandao memoria para a arvore que será lida do arquivo
-	fp = fopen("E:\\arvore.bin","rb"); // abre o arquivo binario que contém a arvore salva 
+	fp = fopen("D:\\arvore.bin","rb"); // abre o arquivo binario que contém a arvore salva 
 	// tenta abrir o arquivo
 	if(fp){	
 	    leitura = malloc (sizeof(TPessoa));// aloca memoria para uma estrutura Tpessoa
@@ -158,86 +158,36 @@ TArvore* TPessoaRead()
 		if(fread(leitura,sizeof(TPessoa),1,fp) ==1){
 			
 				if(!TPessoaVazia(leitura)){
-				//	printf("%s\n",leitura->nome);
+					//printf("%s\n",leitura->nome);
 				
 					// se a arvore for vazia
 					if(i==0){
-						puts("s");
+						
 						arvore_file->pessoa = TPessoaCreate(leitura->nome);
-						puts("inseriu a pessoa");
+						//puts("inseriu a pessoa");
 					}
 					
 					if(i==1){
 						TPessoa* pai = TPessoaCreate(leitura->nome);
 						TPessoaInsert(arvore_file->pessoa,pai,PAI);
-						puts("inseriu o pai");
+						//puts("inseriu o pai");
 					}
 					if(i==2){
 						TPessoa* avoP = TPessoaCreate(leitura->nome);
 						TPessoaInsert(arvore_file->pessoa->pai,avoP,PAI);
-						puts("inseriu o avopaterno");
+						//puts("inseriu o avopaterno");
 					}
 					if(i==3){
 						TPessoa* avoPP = TPessoaCreate(leitura->nome);
-						TPessoaInsert(arvore_file->pessoa->pai->pai,avoPP,PAI);
-						puts("inseriu o paiavopaterno");
+						TPessoaInsert(arvore_file->pessoa->pai->pai,avoPP,MAE);
+						//puts("inseriu o maeavopaterno");
 					}
 					if(i==4){
 						TPessoa* avoPM = TPessoaCreate(leitura->nome);
-						TPessoaInsert(arvore_file->pessoa->pai->pai,avoPM,MAE);
-						puts("inseriu o MAEAVOPATERNO");
+						TPessoaInsert(arvore_file->pessoa->pai->pai,avoPM,PAI);
+						//puts("inseriu o paiavopaterno");
 					}
-					if(i==5){
-						TPessoa* maepai = TPessoaCreate(leitura->nome);
-						TPessoaInsert(arvore_file->pessoa->pai,maepai,MAE);
-						puts("inseriu o AVOHPATERNA");
-					}
-					if(i==6){
-						TPessoa* Pavohp = TPessoaCreate(leitura->nome);
-						TPessoaInsert(arvore_file->pessoa->pai->mae,Pavohp,PAI);
-						puts("inseriu o paiavohpaterno");
-					}
-					if(i==7){
-						TPessoa* MavohP = TPessoaCreate(leitura->nome);
-						TPessoaInsert(arvore_file->pessoa->pai->mae,MavohP,MAE);
-						puts("inseriu o maeavohpaterna");
-					}
-					if(i==8){
-						TPessoa* mae = TPessoaCreate(leitura->nome);
-						TPessoaInsert(arvore_file->pessoa,mae,MAE);
-						puts("mae");
-					}
-					if(i==9){
-						TPessoa* avoM = TPessoaCreate(leitura->nome);
-						TPessoaInsert(arvore_file->pessoa->mae,avoM,PAI);
-						puts("inseriu o avomaterno");
-					}
-					if(i==10){
-						TPessoa* pavom = TPessoaCreate(leitura->nome);
-						TPessoaInsert(arvore_file->pessoa->mae->pai,pavom,PAI);
-						puts("inseriu o paiavomaterno");
-					}
-					if(i==11){
-						TPessoa* mavom = TPessoaCreate(leitura->nome);
-						TPessoaInsert(arvore_file->pessoa->mae->pai,mavom,MAE);
-						puts("inseriu o maeavomaterno");
-					}
-					if(i==12){
-						TPessoa* avohm = TPessoaCreate(leitura->nome);
-						TPessoaInsert(arvore_file->pessoa->mae,avohm,MAE);
-						puts("inseriu o avohmaterna");
-					}
-					if(i==13){
-						TPessoa* pavohm = TPessoaCreate(leitura->nome);
-						TPessoaInsert(arvore_file->pessoa->mae->mae,pavohm,PAI);
-						puts("inseriu o paiavohmaterna");
-					}
-					if(i==14){
-						TPessoa* maeavohm = TPessoaCreate(leitura->nome);
-						TPessoaInsert(arvore_file->pessoa->mae->mae,maeavohm,MAE);
-						puts("inseriu o maeavohmaterna");
-					}
-
+					
 					
 				}else{
 					puts("pessoa com fome");
@@ -254,7 +204,7 @@ TArvore* TPessoaRead()
 	}else{
 		puts ("Erro ao abrir o arquivo leitura");
 	}
-	fclose(fp);
+	//TPessoaPreOrdem(arvore_file->pessoa);
 	return arvore_file;
 }
 /*
